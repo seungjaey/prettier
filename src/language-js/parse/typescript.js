@@ -33,6 +33,7 @@ function createParseError(error) {
 }
 
 function parse(text, parsers, options = {}) {
+  // console.log('DEBUG : Typescript Parser');
   const textToParse = replaceHashbang(text);
   const jsx = isProbablyJsx(text);
 

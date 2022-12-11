@@ -1,4 +1,8 @@
 overrides:
+  - files: "test.ts"
+    options:
+      semi: true
+      parser: typescript
   - files: "**/*.{js,mjs,cjs}"
     options:
       parser: meriyah

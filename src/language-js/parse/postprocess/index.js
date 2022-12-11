@@ -9,6 +9,7 @@ const { throwErrorForInvalidNodes } = require("./typescript.js");
 const throwSyntaxError = require("./throw-syntax-error.js");
 
 function postprocess(ast, options) {
+  // console.log('DEBUG : typescript : postProcess');
   if (
     options.parser === "typescript" &&
     // decorators or abstract properties
@@ -175,6 +176,9 @@ function postprocess(ast, options) {
         break;
     }
   });
+
+  // console.log('DEBUG : BEFORE');
+  // console.log(ast);
 
   return ast;
 

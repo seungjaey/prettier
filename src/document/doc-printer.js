@@ -265,9 +265,13 @@ function printDocToString(doc, options) {
   /** @type Command[] */
   const lineSuffix = [];
 
+  let i = 0;
   while (cmds.length > 0) {
     const { ind, mode, doc } = cmds.pop();
-
+    console.log(`<${++i}> -----`);
+    console.log(`printDocToString : ${JSON.stringify(ind)} : ${mode} : ${JSON.stringify(doc)}`);
+    console.log(out.join(''));
+    console.log(`-----</${i}>`);
     if (typeof doc === "string") {
       const formatted = newLine !== "\n" ? doc.replace(/\n/g, newLine) : doc;
       out.push(formatted);
@@ -475,14 +479,18 @@ function printDocToString(doc, options) {
             }
           }
           if (groupMode === MODE_FLAT) {
+            console.log('DEBUG : FLAT MODE');
             const flatContents =
               doc.type === "if-break"
                 ? doc.flatContents
                 : doc.negate
                 ? indent(doc.contents)
                 : doc.contents;
+            console.log(`flat final ; ${flatContents}`);
             if (flatContents) {
               cmds.push({ ind, mode, doc: flatContents });
+            } else {
+              cmds.push({ ind, mode, doc: ';' });
             }
           }
 

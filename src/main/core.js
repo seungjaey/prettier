@@ -41,6 +41,10 @@ function coreFormat(originalText, opts, addAlignmentSize = 0) {
     return { formatted: "", cursorOffset: -1, comments: [] };
   }
 
+  // console.log('DEBUG : coreFormat');
+  // console.log(opts);
+
+  // POINT: AST
   const { ast, text } = parser.parse(originalText, opts);
 
   if (opts.cursorOffset >= 0) {
@@ -53,6 +57,7 @@ function coreFormat(originalText, opts, addAlignmentSize = 0) {
   const astComments = attachComments(text, ast, opts);
   const doc = printAstToDoc(ast, opts, addAlignmentSize);
 
+  // POINT: formatting
   const result = printDocToString(doc, opts);
 
   comments.ensureAllCommentsPrinted(astComments);

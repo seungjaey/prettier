@@ -109,6 +109,7 @@ async function main(context) {
     }
     await formatStdin(context);
   } else if (hasFilePatterns) {
+    // console.log("Entry Point");
     await formatFiles(context);
   } else {
     process.exitCode = 1;

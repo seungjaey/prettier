@@ -39,6 +39,7 @@ function resolveParser(opts, parsers = getParsers(opts)) {
   }
 
   if (typeof opts.parser === "string") {
+    // console.log(`opt.parser = ${opts.parser}`);
     if (Object.prototype.hasOwnProperty.call(parsers, opts.parser)) {
       return parsers[opts.parser];
     }
@@ -76,11 +77,15 @@ function parse(text, opts) {
 
   const parser = resolveParser(opts, parsers);
 
+  // console.log('DEBUG : RESOLVED PARSER');
+  // console.log(parser);
   try {
     if (parser.preprocess) {
       text = parser.preprocess(text, opts);
     }
 
+    // console.log(parsersForCustomParserApi);
+    // console.log(JSON.stringify(parser.parse(text, parsersForCustomParserApi, opts)));
     return {
       text,
       ast: parser.parse(text, parsersForCustomParserApi, opts),

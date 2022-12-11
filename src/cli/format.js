@@ -226,6 +226,8 @@ function format(context, input, opt) {
     );
   }
 
+  // console.log('just formatWithCursor');
+  // console.log(opt);
   return prettier.formatWithCursor(input, opt);
 }
 
@@ -320,6 +322,7 @@ async function formatFiles(context) {
     }
   }
 
+  // console.log('DEBUG : CHECK START');
   for await (const pathOrError of expandPatterns(context)) {
     if (typeof pathOrError === "object") {
       context.logger.error(pathOrError.error);
@@ -350,6 +353,8 @@ async function formatFiles(context) {
       ...(await getOptionsForFile(context, filename)),
       filepath: filename,
     };
+
+    // console.log(options);
 
     let printedFilename;
     if (isTTY()) {
@@ -400,6 +405,7 @@ async function formatFiles(context) {
         result = { formatted: input };
       } else {
         result = format(context, input, options);
+        console.log(result);
       }
       output = result.formatted;
     } catch (error) {
