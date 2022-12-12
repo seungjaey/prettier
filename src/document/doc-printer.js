@@ -482,15 +482,13 @@ function printDocToString(doc, options) {
             console.log('DEBUG : FLAT MODE');
             const flatContents =
               doc.type === "if-break"
-                ? doc.flatContents
+                ? (doc.flatContents || doc.breakContents.flatContents)
                 : doc.negate
                 ? indent(doc.contents)
                 : doc.contents;
             console.log(`flat final ; ${flatContents}`);
             if (flatContents) {
               cmds.push({ ind, mode, doc: flatContents });
-            } else {
-              cmds.push({ ind, mode, doc: ';' });
             }
           }
 
